@@ -5,7 +5,7 @@
     app.controller('dugmaCtrl', function ($scope, $http) {
         var self = this;
 
-        $scope.fun = "ggg9"
+        $scope.fun = "ggg"
           //  function () {
            // alert("Fdsfdsfa")
         self.fir = "עככע";
