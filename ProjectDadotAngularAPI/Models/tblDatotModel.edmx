@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="datotModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="agaf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="fax" Type="nvarchar" MaxLength="15" />
+          <Property Name="address" Type="nvarchar" MaxLength="30" />
+          <Property Name="postal_code" Type="nvarchar" MaxLength="15" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="work_phone" Type="nvarchar" MaxLength="10" />
+          <Property Name="pelephone1" Type="nvarchar" MaxLength="10" />
+          <Property Name="pelephone2" Type="nvarchar" MaxLength="10" />
+          <Property Name="email1" Type="nvarchar" MaxLength="20" />
+          <Property Name="email2" Type="nvarchar" MaxLength="20" />
+          <Property Name="comments" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="employee_in_council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_id" Type="int" />
+          <Property Name="code_council" Type="int" />
+          <Property Name="code_role" Type="int" />
+        </EntityType>
+        <EntityType Name="location_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="locations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+          <Property Name="location_type_id" Type="int" />
+          <Property Name="parent_id" Type="int" />
+        </EntityType>
+        <EntityType Name="rav">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_employee_in_council" Type="int" />
+          <Property Name="location_id" Type="int" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="nvarchar" MaxLength="100" />
+          <Property Name="code_agaf" Type="int" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__council__status___300424B4">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="council" Type="Self.council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="council">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___code___3F466844">
+          <End Role="council" Type="Self.council" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="code_council" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___code___403A8C7D">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="code_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___emplo__3E52440B">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__locations__locat__38996AB5">
+          <End Role="location_type" Type="Self.location_type" Multiplicity="0..1" />
+          <End Role="locations" Type="Self.locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="locations">
+              <PropertyRef Name="location_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rav__code_employ__4316F928">
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="0..1" />
+          <End Role="rav" Type="Self.rav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_in_council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rav">
+              <PropertyRef Name="code_employee_in_council" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rav__location_id__440B1D61">
+          <End Role="locations" Type="Self.locations" Multiplicity="0..1" />
+          <End Role="rav" Type="Self.rav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rav">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__role__code_agaf__3B75D760">
+          <End Role="agaf" Type="Self.agaf" Multiplicity="0..1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agaf">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="code_agaf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="datotModelStoreContainer">
+          <EntitySet Name="agaf" EntityType="Self.agaf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="council" EntityType="Self.council" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee_in_council" EntityType="Self.employee_in_council" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="location_type" EntityType="Self.location_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="locations" EntityType="Self.locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rav" EntityType="Self.rav" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__council__status___300424B4" Association="Self.FK__council__status___300424B4">
+            <End Role="status" EntitySet="status" />
+            <End Role="council" EntitySet="council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___code___3F466844" Association="Self.FK__employee___code___3F466844">
+            <End Role="council" EntitySet="council" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___code___403A8C7D" Association="Self.FK__employee___code___403A8C7D">
+            <End Role="role" EntitySet="role" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___emplo__3E52440B" Association="Self.FK__employee___emplo__3E52440B">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__locations__locat__38996AB5" Association="Self.FK__locations__locat__38996AB5">
+            <End Role="location_type" EntitySet="location_type" />
+            <End Role="locations" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rav__code_employ__4316F928" Association="Self.FK__rav__code_employ__4316F928">
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+            <End Role="rav" EntitySet="rav" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rav__location_id__440B1D61" Association="Self.FK__rav__location_id__440B1D61">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="rav" EntitySet="rav" />
+          </AssociationSet>
+          <AssociationSet Name="FK__role__code_agaf__3B75D760" Association="Self.FK__role__code_agaf__3B75D760">
+            <End Role="agaf" EntitySet="agaf" />
+            <End Role="role" EntitySet="role" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="datotModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="agaf">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="role" Relationship="Self.FK__role__code_agaf__3B75D760" FromRole="agaf" ToRole="role" />
+        </EntityType>
+        <EntityType Name="council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fax" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="postal_code" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="status" Relationship="Self.FK__council__status___300424B4" FromRole="council" ToRole="status" />
+          <NavigationProperty Name="employee_in_council" Relationship="Self.FK__employee___code___3F466844" FromRole="council" ToRole="employee_in_council" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="work_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="pelephone1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="pelephone2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="email1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="comments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="employee_in_council" Relationship="Self.FK__employee___emplo__3E52440B" FromRole="employee" ToRole="employee_in_council" />
+        </EntityType>
+        <EntityType Name="employee_in_council">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_id" Type="Int32" />
+          <Property Name="code_council" Type="Int32" />
+          <Property Name="code_role" Type="Int32" />
+          <NavigationProperty Name="council" Relationship="Self.FK__employee___code___3F466844" FromRole="employee_in_council" ToRole="council" />
+          <NavigationProperty Name="employee" Relationship="Self.FK__employee___emplo__3E52440B" FromRole="employee_in_council" ToRole="employee" />
+          <NavigationProperty Name="role" Relationship="Self.FK__employee___code___403A8C7D" FromRole="employee_in_council" ToRole="role" />
+          <NavigationProperty Name="rav" Relationship="Self.FK__rav__code_employ__4316F928" FromRole="employee_in_council" ToRole="rav" />
+        </EntityType>
+        <EntityType Name="location_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="locations" Relationship="Self.FK__locations__locat__38996AB5" FromRole="location_type" ToRole="locations" />
+        </EntityType>
+        <EntityType Name="locations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="location_type_id" Type="Int32" />
+          <Property Name="parent_id" Type="Int32" />
+          <NavigationProperty Name="location_type" Relationship="Self.FK__locations__locat__38996AB5" FromRole="locations" ToRole="location_type" />
+          <NavigationProperty Name="rav" Relationship="Self.FK__rav__location_id__440B1D61" FromRole="locations" ToRole="rav" />
+        </EntityType>
+        <EntityType Name="rav">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_employee_in_council" Type="Int32" />
+          <Property Name="location_id" Type="Int32" />
+          <NavigationProperty Name="employee_in_council" Relationship="Self.FK__rav__code_employ__4316F928" FromRole="rav" ToRole="employee_in_council" />
+          <NavigationProperty Name="locations" Relationship="Self.FK__rav__location_id__440B1D61" FromRole="rav" ToRole="locations" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="code_agaf" Type="Int32" />
+          <NavigationProperty Name="agaf" Relationship="Self.FK__role__code_agaf__3B75D760" FromRole="role" ToRole="agaf" />
+          <NavigationProperty Name="employee_in_council" Relationship="Self.FK__employee___code___403A8C7D" FromRole="role" ToRole="employee_in_council" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="council" Relationship="Self.FK__council__status___300424B4" FromRole="status" ToRole="council" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__role__code_agaf__3B75D760">
+          <End Role="agaf" Type="Self.agaf" Multiplicity="0..1" />
+          <End Role="role" Type="Self.role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="agaf">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="role">
+              <PropertyRef Name="code_agaf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__council__status___300424B4">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="council" Type="Self.council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="council">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___code___3F466844">
+          <End Role="council" Type="Self.council" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="code_council" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___emplo__3E52440B">
+          <End Role="employee" Type="Self.employee" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="employee_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__employee___code___403A8C7D">
+          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_in_council">
+              <PropertyRef Name="code_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rav__code_employ__4316F928">
+          <End Role="employee_in_council" Type="Self.employee_in_council" Multiplicity="0..1" />
+          <End Role="rav" Type="Self.rav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee_in_council">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rav">
+              <PropertyRef Name="code_employee_in_council" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__locations__locat__38996AB5">
+          <End Role="location_type" Type="Self.location_type" Multiplicity="0..1" />
+          <End Role="locations" Type="Self.locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="location_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="locations">
+              <PropertyRef Name="location_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rav__location_id__440B1D61">
+          <End Role="locations" Type="Self.locations" Multiplicity="0..1" />
+          <End Role="rav" Type="Self.rav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locations">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rav">
+              <PropertyRef Name="location_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="datotEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="agaf" EntityType="Self.agaf" />
+          <EntitySet Name="council" EntityType="Self.council" />
+          <EntitySet Name="employee" EntityType="Self.employee" />
+          <EntitySet Name="employee_in_council" EntityType="Self.employee_in_council" />
+          <EntitySet Name="location_type" EntityType="Self.location_type" />
+          <EntitySet Name="locations" EntityType="Self.locations" />
+          <EntitySet Name="rav" EntityType="Self.rav" />
+          <EntitySet Name="role" EntityType="Self.role" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__role__code_agaf__3B75D760" Association="Self.FK__role__code_agaf__3B75D760">
+            <End Role="agaf" EntitySet="agaf" />
+            <End Role="role" EntitySet="role" />
+          </AssociationSet>
+          <AssociationSet Name="FK__council__status___300424B4" Association="Self.FK__council__status___300424B4">
+            <End Role="status" EntitySet="status" />
+            <End Role="council" EntitySet="council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___code___3F466844" Association="Self.FK__employee___code___3F466844">
+            <End Role="council" EntitySet="council" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___emplo__3E52440B" Association="Self.FK__employee___emplo__3E52440B">
+            <End Role="employee" EntitySet="employee" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__employee___code___403A8C7D" Association="Self.FK__employee___code___403A8C7D">
+            <End Role="role" EntitySet="role" />
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rav__code_employ__4316F928" Association="Self.FK__rav__code_employ__4316F928">
+            <End Role="employee_in_council" EntitySet="employee_in_council" />
+            <End Role="rav" EntitySet="rav" />
+          </AssociationSet>
+          <AssociationSet Name="FK__locations__locat__38996AB5" Association="Self.FK__locations__locat__38996AB5">
+            <End Role="location_type" EntitySet="location_type" />
+            <End Role="locations" EntitySet="locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rav__location_id__440B1D61" Association="Self.FK__rav__location_id__440B1D61">
+            <End Role="locations" EntitySet="locations" />
+            <End Role="rav" EntitySet="rav" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="datotModelStoreContainer" CdmEntityContainer="datotEntities">
+          <EntitySetMapping Name="agaf">
+            <EntityTypeMapping TypeName="datotModel.agaf">
+              <MappingFragment StoreEntitySet="agaf">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="council">
+            <EntityTypeMapping TypeName="datotModel.council">
+              <MappingFragment StoreEntitySet="council">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="postal_code" ColumnName="postal_code" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee">
+            <EntityTypeMapping TypeName="datotModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="work_phone" ColumnName="work_phone" />
+                <ScalarProperty Name="pelephone1" ColumnName="pelephone1" />
+                <ScalarProperty Name="pelephone2" ColumnName="pelephone2" />
+                <ScalarProperty Name="email1" ColumnName="email1" />
+                <ScalarProperty Name="email2" ColumnName="email2" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employee_in_council">
+            <EntityTypeMapping TypeName="datotModel.employee_in_council">
+              <MappingFragment StoreEntitySet="employee_in_council">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="code_council" ColumnName="code_council" />
+                <ScalarProperty Name="code_role" ColumnName="code_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="location_type">
+            <EntityTypeMapping TypeName="datotModel.location_type">
+              <MappingFragment StoreEntitySet="location_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locations">
+            <EntityTypeMapping TypeName="datotModel.locations">
+              <MappingFragment StoreEntitySet="locations">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location_type_id" ColumnName="location_type_id" />
+                <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rav">
+            <EntityTypeMapping TypeName="datotModel.rav">
+              <MappingFragment StoreEntitySet="rav">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code_employee_in_council" ColumnName="code_employee_in_council" />
+                <ScalarProperty Name="location_id" ColumnName="location_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="datotModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="code_agaf" ColumnName="code_agaf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="datotModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="datotModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

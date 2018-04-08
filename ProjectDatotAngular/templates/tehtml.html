@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../controller/module.js"></script>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+
+    
+
+<body ng-app=”myApp”>
+
+    <div ng-app="myApp" class="container" ng-repeat="item in data" ng-controller="myCtrl">
+        <h2>Basic Table</h2>
+        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+        <table class="table">
+           
+            <tr>{{item.name}} </tr>
+                   
+               
+            <tr> {{item.age}}</tr>
+                    
+               
+            <tr>{{item.email}} </tr>
+                   
+             
+           
+        </table>
+    </div>
+
+
+
+
+</body>
+
+<!--<body>
+<div ng-app="myApp" ng-init="person=['aa','bb','cc']">
+    <table>
+        <tr  ng-repeat="item in person">
+            <td w3-test-directive>
+              
+                <span> {{item}}</span>
+               
+            </td>
+        </tr>
+    </table>
+</div>
+</body>-->
+</html>
