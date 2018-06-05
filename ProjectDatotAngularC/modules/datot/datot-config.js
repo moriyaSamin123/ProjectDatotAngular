@@ -14,18 +14,19 @@ routerApp.config(function ($stateProvider, $urlRouterProvider) {
         //controller: 'dugmaCtrl',
        // controllerAs: 'vm'
     })
+   
+      .state('councils', {
+          url: '/councils',
+          templateUrl: 'modules/datot/templates/councils.html',
+          controller: 'councilsCtrl',
+          controllerAs: 'vm'
+      })
     .state('dugma', {
         url: '/dugma',
         templateUrl: 'modules/datot/templates/dugma.html',
         controller: 'dugmaCtrl',
         controllerAs: 'vm'
     })
-      .state('login', {
-          url: '/dugma',
-          templateUrl: 'modules/datot/templates/login.html',
-          controller: 'loginCtrl',
-          controllerAs: 'vm'
-      })
 
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
         //.state('about', {

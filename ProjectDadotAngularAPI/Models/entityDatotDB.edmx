@@ -450,7 +450,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="datotEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="datotEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="agaf" EntityType="Self.agaf" />
           <EntitySet Name="council" EntityType="Self.council" />
           <EntitySet Name="employee" EntityType="Self.employee" />
@@ -499,7 +499,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="datotModelStoreContainer" CdmEntityContainer="datotEntities">
+        <EntityContainerMapping StorageEntityContainer="datotModelStoreContainer" CdmEntityContainer="datotEntities1">
           <EntitySetMapping Name="agaf">
             <EntityTypeMapping TypeName="datotModel.agaf">
               <MappingFragment StoreEntitySet="agaf">

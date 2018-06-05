@@ -46,6 +46,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -226,51 +234,51 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\agaf.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\council.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\employee.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\employee_in_council.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entityDatotDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>entityDatotDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entityDatotDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\entityDatotDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>entityDatotDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\locations.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\location_type.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\rav.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\status.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblDatotModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tblDatotModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblDatotModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tblDatotModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tblDatotModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>tblDatotModel.edmx</DependentUpon>
+      <DependentUpon>entityDatotDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -281,16 +289,6 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Models\tblDatotModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tblDatotModel.edmx</DependentUpon>
-      <LastGenOutput>tblDatotModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\tblDatotModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>tblDatotModel.edmx</DependentUpon>
-      <LastGenOutput>tblDatotModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -310,12 +308,15 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\tblDatotModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>tblDatotModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\tblDatotModel.edmx.diagram">
-      <DependentUpon>tblDatotModel.edmx</DependentUpon>
+    <Content Include="Models\entityDatotDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>entityDatotDB.edmx</DependentUpon>
+      <LastGenOutput>entityDatotDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\entityDatotDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>entityDatotDB.edmx</DependentUpon>
+      <LastGenOutput>entityDatotDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -325,11 +326,20 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\entityDatotDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>entityDatotDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\entityDatotDB.edmx.diagram">
+      <DependentUpon>entityDatotDB.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.js" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />

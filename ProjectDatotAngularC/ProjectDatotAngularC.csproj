@@ -75,21 +75,18 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="modules\app.js" />
+    <Content Include="modules\datot\controllers\dugmaCtrl.js" />
     <Content Include="modules\datot\datot-config.js" />
     <Content Include="modules\datot\datot-module.js" />
     <Content Include="modules\datot\datot-run.js" />
-    <Content Include="modules\datot\controllers\dugmaCtrl.js" />
-    <Content Include="modules\datot\services\authentication.service.js" />
-    <Content Include="modules\datot\services\flash.service.js" />
-    <Content Include="modules\datot\services\user.service.js" />
-    <Content Include="modules\datot\services\user.service.local-storage.js" />
+    <Content Include="modules\datot\controllers\councilsCtrl.js" />
+    <Content Include="modules\datot\services\saveService.js" />
     <Content Include="modules\datot\templates\dugma.html" />
-    <Content Include="modules\datot\templates\home.view.html" />
-    <Content Include="modules\datot\templates\index.html" />
+    <Content Include="modules\datot\templates\councils.html" />
     <Content Include="modules\datot\templates\login.html" />
-    <Content Include="modules\datot\templates\login.view.html" />
-    <Content Include="modules\datot\templates\register.view.html" />
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
