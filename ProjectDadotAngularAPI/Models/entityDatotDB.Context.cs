@@ -13,9 +13,9 @@ namespace ProjectDadotAngularAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class datotEntities1 : DbContext
+    public partial class datotEntities : DbContext
     {
-        public datotEntities1()
+        public datotEntities()
             : base("name=datotEntities1")
         {
         }
