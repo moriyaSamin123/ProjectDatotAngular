@@ -18,10 +18,10 @@ namespace ProjectDadotAngularAPI.Controllers
 
 
 
-        datotEntities1 dbContext = null;
+        datotEntities dbContext = null;
         public rashiController()
         {
-            dbContext = new datotEntities1();
+            dbContext = new datotEntities();
         }
 
         //[ResponseType(typeof(council))]

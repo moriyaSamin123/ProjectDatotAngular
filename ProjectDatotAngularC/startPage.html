@@ -1,57 +1,69 @@
 ﻿
 <html ng-app="datotTemplate">
 <head>
-   <!--<link href="../../../Content/bootstrap.min.css" rel="stylesheet" />-->
-    <!--<script src="Scripts/bootstrap.min.js"></script>-->
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <!--<script src="Scripts/bootstrap.min.js"></script>-->
-  
-    <!-- CSS (load bootstrap) -->
-    
-    <style>
-        .navbar {
-            border-radius: 0;
-        }
-    </style>
-
-    <!-- JS (load angular, ui-router, and our custom js file) -->
-    <!--<script src="http://code.angularjs.org/1.2.13/angular.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
- -->
     <script src="Scripts/angular.min.js"></script>
-    <!--<script src="Scripts/angular.min.js"></script>-->
     <script src="Scripts/angular-route.min.js"></script>
     <script src="Scripts/angular-ui-router.min.js"></script>
-
     <script src="modules/datot/datot-module.js"></script>
     <script src="modules/datot/datot-config.js"></script>
     <script src="modules/datot/controllers/dugmaCtrl.js"></script>
     <script src="modules/datot/controllers/councilsCtrl.js"></script>
     <script src="modules/datot/services/saveService.js"></script>
-     <script src="modules/app.js"></script>
+    <script src="modules/app.js"></script>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" ui-sref="#">AngularUI Router</a>
+    <div class="text-right">
+
+        <!-- NAVIGATION -->
+        <!--<nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="#">   <div class="card-img-top text-right" >
+
+    <img src="Images/logo.jpg" width="150" height="100"/>
+        </div></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="dugma">dugma</a></li>
+                <li><a ui-sref="councils">councils</a></li>
+            </ul>
+        </nav>-->
+
+        <div class="card-header" style="background:#285c7e">
+            <div class="card-img-top text-right ">
+
+                <img src="Images/logo.jpg" width="150" height="100" />
+            </div>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a ui-sref="home">Home</a></li>
-            <li><a ui-sref="dugma">dugma</a></li>
-            <li><a ui-sref="councils">councils</a></li>
-        </ul>
-    </nav>
+        
+            <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-end" role="navigation" dir="rtl">
 
-    <!-- MAIN CONTENT -->
-    <div class="container">
 
-        <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
-        <div ui-view></div>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
 
+                        <a class="nav-item nav-link active" style="background:#dcdcdc" ui-sref="councils">מועצות דתיות</a>
+                        <a class="nav-item nav-link active" ui-sref="lists">רשימות כלליות</a>
+                        <a class="nav-item nav-link active" ui-sref="rav">רבנים</a>
+                        <a class="nav-item nav-link active" ui-sref="users">ניהול משתמשים</a>
+                    </div>
+                </div>
+            </nav>
+       
+        
+        <div class="row">
+        <div class="col-md-12 text-right" style="background:#237fc4"></div>
     </div>
+        <!-- MAIN CONTENT -->
+        <div class="container-fluid">
 
+            <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+            <div ui-view></div>
+
+        </div>
+    </div>
 </body>
 </html>
