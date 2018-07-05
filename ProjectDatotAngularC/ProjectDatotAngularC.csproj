@@ -26,7 +26,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
-    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,7 +74,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Images\logo.jpg" />
     <Content Include="modules\app.js" />
     <Content Include="modules\datot\controllers\dugmaCtrl.js" />
     <Content Include="modules\datot\datot-config.js" />
@@ -85,10 +83,7 @@
     <Content Include="modules\datot\services\saveService.js" />
     <Content Include="modules\datot\templates\dugma.html" />
     <Content Include="modules\datot\templates\councils.html" />
-    <Content Include="modules\datot\templates\lists.html" />
     <Content Include="modules\datot\templates\login.html" />
-    <Content Include="modules\datot\templates\rav.html" />
-    <Content Include="modules\datot\templates\users.html" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
@@ -908,9 +903,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="startPage.html" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
